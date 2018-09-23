@@ -1,33 +1,42 @@
 class Host {
     constructor(params) {
-        
+        this.name = params.name;
     }
 
     showHost() {
-        console.log("Calling the showHost() function.");
         $(".host").css("bottom", "0");
         $(".host").animate({ "left": "+=100%" }, "slow" );
     }
 
     hideHost() {
-        console.log("Calling the hideHost() function.");
         $(".host").css("bottom", "0");
         $(".host").animate({ "left": "-=100%" }, "slow" );
     }
 
-    newMessage(message) {
+    newMessage(message, hideOnClick) {
         var messageBuild = "";
         var secondCount = 200;
+        var hideHostX = this.hideHost;
         $('[data-toggle="popover"]').popover({ 
             placement: 'top' 
         });
+
+        $('.popover, [data-toggle="popover"]').on("click", function(){
+            $('[data-toggle="popover"]').popover('hide');
+            $('[data-toggle="popover"]').popover('dispose');
+            if(hideOnClick === true) {
+                hideHostX();
+            }
+            // $(".popover").off("click", );
+        });
+
         for(var i = 0; i <= message.length; i++) {
             messageBuild = messageBuild + message.charAt(i);
             setTimeout(function(currentMessage){
                 $('[data-toggle="popover"]').popover('show');
                 $('[data-toggle="popover"]').attr("data-content", currentMessage);
             }, secondCount, messageBuild);
-            secondCount += 125;
+            secondCount += 20;
         }
         return secondCount;
     }

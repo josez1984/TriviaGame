@@ -1,10 +1,22 @@
 class App {
     constructor(params) {
         this.players = [];
+        this.difficulty = this.difficulty;
     }
 
     get backgrounds() {
         return this.backgroundsList();
+    }
+    
+    get questionSeconds() {
+        if(this.difficulty === 1) {
+            return 10;
+        } else if(this.difficulty === 2) {
+            return 7;
+        } else if(this.difficulty === 3) { 
+            return 4;
+        }
+        return 0;
     }
 
     backgroundsList() {
