@@ -11,19 +11,20 @@
     <title>Trivia Game</title>
 </head>
 <body> 
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 text-center">Girl Trivia</h1>
-      </div>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 text-center">Girl Trivia</h1>
     </div>
-  <nav class="navbar sticky-top navbar-expand-sm navbar-dark">
+  </div>
+
+  <nav id="navbar-id" class="navbar sticky-top navbar-expand-sm navbar-dark">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item">
@@ -31,7 +32,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
-            </li>    
+            </li>     -->
         </ul>
     </div>  
   </nav>
@@ -55,12 +56,30 @@
     </div>
     <div class="row p-2">
       <div class="col-sm">
-        <h4 id="current-difficulty-text"class="text-center">Difficulty</h6>
+        <h6 id="current-difficulty-text"class="text-center">Difficulty</h6>
       </div>
     </div>
     <div class="row p-2">
       <div class="col-sm">
         <button id="welcome-screen-btn-start" type="button" class="btn btn-lg float-right display-none" data-value="3">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="game-section" class="container-fluid">
+    <div class="row p-2">
+      <div class="col-sm">  
+        <div id="game-section-card" class="card text-center">
+          <div class="card-header">Question</div>
+          <div id="question-card-body" class="card-body">
+            <h5 class="card-title">time Remaining: </h5>
+            <p id="question-text" class="card-text"></p>
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            <div id="question-card-choices" class="container">
+            </div>
+          </div>
+          <div class="card-footer text-muted">footer area</div>
+        </div>
       </div>
     </div>
   </div>
@@ -78,7 +97,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="assets/components/welcome_screen/welcomeScreen.js"></script>
 <script src="assets/javascript/logic.js"></script>
 <script src="assets/javascript/app.js"></script>
 <script src="assets/javascript/host.js"></script>

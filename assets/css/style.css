@@ -47,9 +47,16 @@ body {
 .popover-title, .popover-header, .arrow {
     display: none;
 }
-.btn {
+.difficulty-btn {
     background-color: purple;
     color: white;
+}
+.game-choice-button, #welcome-screen-btn-start{
+    background-color: purple;
+    color: white;
+}
+#game-section-card {
+    background-color: lightpink;
 }
 /* .popover-content, .popover-body {
     color: #fff;

@@ -1,7 +1,7 @@
 class App {
     constructor(params) {
         this.players = [];
-        this.difficulty = this.difficulty;
+        this.difficulty = params.difficulty;
     }
 
     get backgrounds() {
@@ -17,6 +17,13 @@ class App {
             return 4;
         }
         return 0;
+    }
+
+    newQuestion() {
+        var questionList = this.questions();
+        var question = questionList[randN(questionList.length, 0)];
+        console.log(question);
+        return question;
     }
 
     backgroundsList() {
@@ -36,6 +43,29 @@ class App {
             'assets/images/Background/1368734.jpg',
             'assets/images/Background/1368764.jpg',
             'assets/images/Background/1368769.jpg'
+        ];
+    }
+
+    questions() {
+        return [
+            {
+                question: "What is pusheen's gender?",
+                choices: {
+                    1: "Male",
+                    2: "Female"
+                },
+                correctChoice: 2
+            },
+            {
+                question: "What is the name of the cowboy in Toy Story?",
+                choices: {
+                    1: "Tommy",
+                    2: "John",
+                    3: "Woody",
+                    4: "Mario"
+                },
+                correctChoice: 3
+            }
         ];
     }
 }

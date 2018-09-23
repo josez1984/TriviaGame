@@ -17,17 +17,9 @@ class Host {
         var messageBuild = "";
         var secondCount = 200;
         var hideHostX = this.hideHost;
+
         $('[data-toggle="popover"]').popover({ 
             placement: 'top' 
-        });
-
-        $('.popover, [data-toggle="popover"]').on("click", function(){
-            $('[data-toggle="popover"]').popover('hide');
-            $('[data-toggle="popover"]').popover('dispose');
-            if(hideOnClick === true) {
-                hideHostX();
-            }
-            // $(".popover").off("click", );
         });
 
         for(var i = 0; i <= message.length; i++) {
@@ -38,6 +30,18 @@ class Host {
             }, secondCount, messageBuild);
             secondCount += 20;
         }
+
+        setTimeout(function(){
+            $('.popover, [data-toggle="popover"]').on("click", function(){
+                $('[data-toggle="popover"]').popover('hide');
+                $('[data-toggle="popover"]').popover('dispose');
+                if(hideOnClick === true) {
+                    hideHostX();
+                }
+                $(".popover").off("click", );
+            });
+        }, secondCount);
+
         return secondCount;
     }
 }

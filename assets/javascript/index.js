@@ -8,6 +8,7 @@ $(document).ready(function(){
     $("#test-hide-div-2").hide();
     $("#test-div-attach").hide();
     $("#welcome-page").hide();
+    $("#game-section").hide();
 
     introSequence(app);
 
@@ -19,8 +20,35 @@ $(document).ready(function(){
 
     $("#welcome-screen-btn-start").on("click", function(){
         console.log("STarting..");
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#navbar-id").offset().top
+        }, 2000);
+        $("#welcome-page").hide();
+        startGame(app);
     }); 
 });
+
+function startGame(app) {
+    var newQuestion = app.newQuestion();
+    var questionBuild = "";
+    var secondCount = 200;
+
+    $("#game-section").show();
+
+    for(var i = 0; i <= newQuestion.question.length; i++) {
+        questionBuild = questionBuild + newQuestion.question.charAt(i);
+        setTimeout(function(currentQuestion){
+            $("#question-text").text(currentQuestion);
+        }, secondCount, questionBuild);
+        secondCount += 20;
+    }
+
+    $.each(newQuestion.choices, function(key, value){
+        console.log(key + ": " + value);
+        var buttonHtml = '<div class="row p-1"><div class="col-sm"><button class="btn btn-block game-choice-button" data-value="' + key + '">' + value + '</button></div></div>';
+        $("#question-card-choices").append(buttonHtml);        
+    });
+}
 
 function setBackground(app) {
     // var bkurls = app.backgrounds;
