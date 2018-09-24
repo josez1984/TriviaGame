@@ -157,7 +157,8 @@ function nextQuestion(app) {
 
                 app.questionCountdownId = questionCountdown;
                 app.newQuestion();
-
+                $('html, body').animate({scrollTop: $(document).height()}, 'slow');
+                
                 gameChoiceBtnClick(app);
                 $("#status-page").hide();
             } 
