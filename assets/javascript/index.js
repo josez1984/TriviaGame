@@ -7,6 +7,7 @@ $(document).ready(function(){
     $("#game-section").hide();
     $("#status-page").hide();
     $("#summary-page").hide();
+    $("#mode-page").hide();
 
     if(app.showHost === 1) {
         app.host.hideHost();
@@ -17,6 +18,14 @@ $(document).ready(function(){
     }
 
     app.addNewPlayer("Player 1");
+    app.addNewPlayer("Player 2");
+
+    $(".col-sm player-2-card-col").hide();
+    if(app.players.length > 1) {
+        $(".footer-text").hide();
+        $(".card-header").hide();
+        $(".col-sm player-2-card-col").show();
+    }
 
     $(".difficulty-btn").on("click", function(){
         app.difficulty = parseInt($(this).data('value'));
@@ -38,7 +47,8 @@ function restart(app) {
     $("#welcome-page").hide();
     $("#game-section").hide();
     $("#summary-page").hide();
-
+    $("#mode-page").hide();
+    
     $("#status-page-text").text("Starting over...");
     $("#status-page").show();
     
@@ -56,33 +66,35 @@ function restart(app) {
     }, 2000);
 }
 
-function answerCorrect(app) {
+function answerCorrect(app, playerId) {
     app.host.rightChoiceSequence();
     $("#welcome-page").hide();
     $("#game-section").hide();
     $("#summary-page").hide();
+    $("#mode-page").hide();
 
-    $("#status-page-text").text("Congratulations, thats the right answer!!");
+    $("#status-page-text").text('Congratulations ' + app.players[playerId].name + ', thats the right answer!!');
     $("#status-page").show();
     
-    app.players[0].correct = app.players[0].correct + 1;
+    app.players[playerId].correct = app.players[playerId].correct + 1;
     
     setTimeout(function(){
         nextQuestion(app)
     }, 2000);
 }
 
-function answerWrong(app, correctAnswer) {
+function answerWrong(app, correctAnswer, playerId) {
     app.host.wrongChoiceSequence();
 
     $("#welcome-page").hide();
     $("#game-section").hide();
     $("#summary-page").hide();
+    $("#mode-page").hide();
 
     $("#status-page-text").text("Wrong answer. The correct answer is: " + correctAnswer);
     $("#status-page").show();
     
-    app.players[0].wrong = app.players[0].wrong + 1;
+    app.players[playerId].wrong = app.players[playerId].wrong + 1;
 
     setTimeout(function(){
         nextQuestion(app)
@@ -91,15 +103,16 @@ function answerWrong(app, correctAnswer) {
 
 function gameChoiceBtnClick(app) {
     $(".game-choice-button").on("click", function(){
+        var playerId = parseInt($(this).data('player-id'))
         var questionKey = parseInt($(this).data('question-idx'));
         var userChoice = parseInt($(this).data('choice'));
         var rightChoice = app.questions[questionKey].correctChoice;
         clearInterval(app.questionCountdownId);
 
         if(rightChoice === userChoice) {
-            answerCorrect(app);
+            answerCorrect(app, playerId);
         } else {
-            answerWrong(app, app.questions[questionKey].choices[rightChoice]);
+            answerWrong(app, app.questions[questionKey].choices[rightChoice], playerId);
         }
     });
 }
@@ -108,6 +121,7 @@ function showCountdown(app) {
     $("#welcome-page").hide();
     $("#game-section").hide();
     $("#summary-page").hide();
+    $("#mode-page").hide();
 
     $("#status-page-text").text("Next question in...");
     $("#status-page").show();
@@ -122,6 +136,7 @@ function timeOver(app) {
     $("#welcome-page").hide();
     $("#game-section").hide();
     $("#summary-page").hide();
+    $("#mode-page").hide();
 
     var key = app.questionKey;
     var rightChoice = app.questions[key].correctChoice;
@@ -130,7 +145,9 @@ function timeOver(app) {
     $("#status-page-text").text("Ooops. Times's up. The correct answer is: " + rightChoiceText);
     $("#status-page").show();
 
-    app.players[0].wrong = app.players[0].wrong + 1;
+    for(var i = 0; i < app.players.length; i++) {
+        app.players[i].wrong = app.players[i].wrong + 1;
+    }
 
     setTimeout(function(){
         nextQuestion(app)
@@ -148,7 +165,7 @@ function nextQuestion(app) {
 
                 var y = app.questionSeconds;
                 var questionCountdown = setInterval(function() {
-                    $("#question-remaining-time").text(y);
+                    $(".question-remaining-time").text(y);
                     if(y === 0) {
                         clearInterval(questionCountdown);
                         timeOver(app);
@@ -161,7 +178,7 @@ function nextQuestion(app) {
                 app.newQuestion();
 
                 $('html, body').animate({scrollTop: $(document).height()}, 'slow');            
-                $("#footer-text").text("Correct: " + app.players[0].correct + ", Wrong: " + app.players[0].wrong + ", Questions left: " + app.questionsLeft());
+                $(".footer-text").text("Correct: " + app.players[0].correct + ", Wrong: " + app.players[0].wrong + ", Questions left: " + app.questionsLeft());
     
                 gameChoiceBtnClick(app);
                 $("#status-page").hide();
@@ -179,6 +196,7 @@ function gameOver(app) {
     $("#game-section").hide();
     $("#status-page").hide();
     $("#summary-page").show();
+    $("#mode-page").hide();
 
     $("#correct-answers-text").text("Correct: " + app.players[0].correct);
     $("#wrong-answers-text").text("Wrong: " + app.players[0].wrong);
@@ -210,4 +228,20 @@ function introSequence(app) {
     }, 1000);
 }
 
+function gameCardHtml() {
+    return '<div class="row p-2">'
+                + '<div class="col-sm">'  
+                    + '<div id="game-section-card" class="card text-center">'
+                        + '<div class="card-header">Question</div>'
+                            + '<div id="question-card-body" class="card-body">'
+                                + '<h5 id="question-remaining-time" class="card-title">time Remaining</h5>'
+                                + '<p id="question-text" class="card-text"></p>'
+                                + '<div id="question-card-choices" class="container">'
+                                + '</div>'
+                            + '</div>'
+                        + '<div id="footer-text" class="card-footer">footer area</div>'
+                    + '</div>'
+                + '</div>'
+            + '</div>';
+}
 

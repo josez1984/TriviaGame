@@ -2,7 +2,7 @@ class App {
     constructor(params) {
         this.players = [];
         this.difficulty = params.difficulty;
-        this.showHost = 1;
+        this.showHost = 0;
         this.questionKey = 0;
         this.questions = [
             {
@@ -118,23 +118,25 @@ class App {
 
     writeChoices(questionKey) {
         var question = this.questions[questionKey];
-        $("#question-card-choices").empty();
-        $.each(this.questions[questionKey].choices, function(key, value){
-            var btnId = "choice-btn-" + key;
-            var buttonHtml = '<div class="row p-1"><div class="col-sm"><button id="' + btnId + '" class="btn btn-block game-choice-button" data-question-idx="' + questionKey + '" data-choice="' + key + '">' + value + '</button></div></div>';
-            $("#question-card-choices").append(buttonHtml);
-        });
+        $(".question-card-choices").empty();
+        for(var i = 0; i < this.players.length; i++) {
+            $.each(this.questions[questionKey].choices, function(key, value) {
+                var btnId = "choice-btn-" + key;
+                var buttonHtml = '<div class="row p-1"><div class="col-sm"><button id="' + btnId + '" class="btn-sm btn-block game-choice-button" data-player-id="' + i + '" data-question-idx="' + questionKey + '" data-choice="' + key + '">' + value + '</button></div></div>';
+                $("#question-card-choices-" + i).append(buttonHtml);
+            });
+        }
     }
 
     writeQuestion(questionKey) {
         var question = this.questions[questionKey].question;
         var questionBuild = "";
         var secondCount = 200;
-    
+        
         for(var i = 0; i <= question.length; i++) {
             questionBuild = questionBuild + question.charAt(i);
             setTimeout(function(questionTextArg) {
-                $("#question-text").text(questionTextArg);
+                $(".question-text").text(questionTextArg);
             }, secondCount, questionBuild);
             secondCount += 20;
         }
