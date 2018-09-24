@@ -72,7 +72,7 @@
         <div id="game-section-card" class="card text-center">
           <div class="card-header">Question</div>
           <div id="question-card-body" class="card-body">
-            <h5 class="card-title">time Remaining: </h5>
+            <h5 id="question-remaining-time" class="card-title">time Remaining</h5>
             <p id="question-text" class="card-text"></p>
             <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             <div id="question-card-choices" class="container">
@@ -80,6 +80,32 @@
           </div>
           <div class="card-footer text-muted">footer area</div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="status-page" class="container-fluid">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-12">
+        <h1 id="status-page-text" class="right-choice-page text-center"></h1>    
+      </div>
+    </div>
+  </div>
+
+  <div id="summary-page" class="container-fluid">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-12">
+        <h1 id="correct-answers-text" class="right-choice-page text-center"></h1>    
+      </div>
+    </div>
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-12">
+        <h1 id="wrong-answers-text" class="right-choice-page text-center">Wrong: </h1>    
+      </div>
+    </div>
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-12">
+          <button id="restart-game-btn" type="button" class="btn btn-block btn-lg">Start Over</button>
       </div>
     </div>
   </div>
@@ -98,6 +124,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="assets/javascript/logic.js"></script>
+<script src="assets/javascript/player.js"></script>
 <script src="assets/javascript/app.js"></script>
 <script src="assets/javascript/host.js"></script>
 <script src="assets/javascript/index.js"></script>
