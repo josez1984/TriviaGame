@@ -159,6 +159,10 @@ function nextQuestion(app) {
                 app.newQuestion();
                 $('html, body').animate({scrollTop: $(document).height()}, 'slow');
                 
+                $("#correct-answers-text").text("Correct: " + app.players[0].correct);
+    $("#wrong-answers-text").text("Wrong: " + app.players[0].wrong);
+                $("#footer-text").text("Correct: " + app.players[0].correct + ", " + "Wrong: " + app.players[0].wrong + ", Questions left: " + app.questionsLeft());
+
                 gameChoiceBtnClick(app);
                 $("#status-page").hide();
             } 
