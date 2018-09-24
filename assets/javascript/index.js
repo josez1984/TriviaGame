@@ -2,7 +2,8 @@ $(document).ready(function(){
     const app = new App({});
     const host = new Host({});
     app.host = host;
-
+    app.addNewPlayer("Player 1");
+    
     $("#welcome-page").hide();
     $("#game-section").hide();
     $("#status-page").hide();
@@ -13,18 +14,8 @@ $(document).ready(function(){
         app.host.hideHost();
         introSequence(app);
     } else {
-        $("#welcome-page").show();
+        $("#mode-page").show();
         app.host.hideHost();
-    }
-
-    app.addNewPlayer("Player 1");
-    app.addNewPlayer("Player 2");
-
-    $(".col-sm player-2-card-col").hide();
-    if(app.players.length > 1) {
-        $(".footer-text").hide();
-        $(".card-header").hide();
-        $(".col-sm player-2-card-col").show();
     }
 
     $(".difficulty-btn").on("click", function(){
@@ -40,6 +31,21 @@ $(document).ready(function(){
 
     $("#restart-game-btn").on("click", function(){
         restart(app);
+    });
+
+    $(".multiplayer-btn").on("click", function(){
+        var mode = parseInt($(this).data('value'));
+        if(mode === 2) {
+            app.addNewPlayer("Player 2");
+            $(".player-2-card-col").show();
+            $("#game-section-card").toggleClass("rotate-180-deg");           
+            $(".footer-text").hide();
+            $(".card-header").hide();           
+        } else {
+            $(".player-2-card-col").hide();          
+        }
+        $("#welcome-page").show();
+        $("#mode-page").hide();
     });
 });
 
@@ -130,6 +136,9 @@ function showCountdown(app) {
 function startGame(app) {
     app.host.getReadySequence();
     nextQuestion(app);
+    if(app.players.length > 1) {
+        navGuis(false);
+    }
 }
 
 function timeOver(app) {
@@ -191,6 +200,14 @@ function nextQuestion(app) {
     }
 }
 
+function navGuis(display) {
+    if(display === true) {
+        $(".jumbotron, .navbar").show();
+    } else {
+        $(".jumbotron, .navbar").hide();
+    }
+}
+
 function gameOver(app) {
     $("#welcome-page").hide();
     $("#game-section").hide();
@@ -221,7 +238,7 @@ function introSequence(app) {
                 delay = app.host.newMessage("Basically, You have to answer as many question as fast as you can. If you run out of time, the game is over, and you lose. Lol. Have fun.", true);
                 setTimeout(function(){
                     app.host.hideHost();
-                    $("#welcome-page").show();
+                    $("#mode-page").show();
                 }, delay + 1000);
             }, delay + 1000);
         }, delay + 1000);

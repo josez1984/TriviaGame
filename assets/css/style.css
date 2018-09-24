@@ -51,7 +51,7 @@ body {
     background-color: purple;
     color: white;
 }
-.game-choice-button, #welcome-screen-btn-start, #restart-game-btn {
+.game-choice-button, #welcome-screen-btn-start, #restart-game-btn, .multiplayer-btn {
     background-color: purple;
     color: white;
 }
