@@ -160,7 +160,7 @@ function nextQuestion(app) {
 
                 gameChoiceBtnClick(app);
                 $("#status-page").hide();
-            }
+            } 
             $("#status-page-text").text(x);
             x = x - 1;
         }, 1000);
@@ -197,6 +197,7 @@ function introSequence(app) {
             setTimeout(function(){
                 delay = app.host.newMessage("Basically, You have to answer as many question as fast as you can. If you run out of time, the game is over, and you lose. Lol. Have fun.", true);
                 setTimeout(function(){
+                    app.host.hideHost();
                     $("#welcome-page").show();
                 }, delay + 1000);
             }, delay + 1000);
