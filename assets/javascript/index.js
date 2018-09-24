@@ -130,6 +130,8 @@ function timeOver(app) {
     $("#status-page-text").text("Ooops. Times's up. The correct answer is: " + rightChoiceText);
     $("#status-page").show();
 
+    app.players[0].wrong = app.players[0].wrong + 1;
+
     setTimeout(function(){
         nextQuestion(app)
     }, 2000);
@@ -157,12 +159,10 @@ function nextQuestion(app) {
 
                 app.questionCountdownId = questionCountdown;
                 app.newQuestion();
-                $('html, body').animate({scrollTop: $(document).height()}, 'slow');
-                
-                $("#correct-answers-text").text("Correct: " + app.players[0].correct);
-    $("#wrong-answers-text").text("Wrong: " + app.players[0].wrong);
-                $("#footer-text").text("Correct: " + app.players[0].correct + ", " + "Wrong: " + app.players[0].wrong + ", Questions left: " + app.questionsLeft());
 
+                $('html, body').animate({scrollTop: $(document).height()}, 'slow');            
+                $("#footer-text").text("Correct: " + app.players[0].correct + ", Wrong: " + app.players[0].wrong + ", Questions left: " + app.questionsLeft());
+    
                 gameChoiceBtnClick(app);
                 $("#status-page").hide();
             } 

@@ -24,7 +24,41 @@ class App {
                 },
                 correctChoice: 3,
                 alreadyAsked: 0
-            }
+            },
+            {
+                question: "Who is the princess that has 7 dwarf friends?",
+                choices: {
+                    1: "Jasmine",
+                    2: "Cinderella",
+                    3: "Little Red Riding Hood",
+                    4: "Snow White",
+                },
+                correctChoice: 4,
+                alreadyAsked: 0
+            },
+            {
+                question: "Who is Mufasa's son?",
+                choices: {
+                    1: "Timon",
+                    2: "Simba",
+                    3: "Little Foot",
+                    4: "Jaffar",
+                },
+                correctChoice: 2,
+                alreadyAsked: 0
+            },
+            {
+                question: "What Teen Titans GO character can morth into any animal?",
+                choices: {
+                    1: "Beast Boy",
+                    2: "Wild Beast",
+                    3: "Robin",
+                    4: "Morphing Man",
+                },
+                correctChoice: 1,
+                alreadyAsked: 0
+            },
+            
         ];
     }
 
