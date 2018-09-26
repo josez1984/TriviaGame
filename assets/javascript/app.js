@@ -2,7 +2,7 @@ class App {
     constructor(params) {
         this.players = [];
         this.difficulty = params.difficulty;
-        this.showHost = 0;
+        this.showHost = 1;
         this.questionKey = 0;
         this.questions = [
             {
